@@ -15,3 +15,8 @@ class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
         fields = '__all__'
+    
+    def validated_data(self,value):
+        if len(value)<10:
+            raise serializer.ValidationError("title is small more then 10 charakter")
+        return value
